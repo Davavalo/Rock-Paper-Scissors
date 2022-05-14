@@ -76,8 +76,10 @@ function playRound(playerSelection, computerSelection) {
                 outcomeEl.innerText = "You Won!"
                 winnerStatus = "winner"
         } 
-            updateChoice(playerSelection, computerSelection)
-            updateScore()
+        
+        updateChoice(playerSelection, computerSelection)
+        updateScore()
+            
   } 
 
   function resetGame() {
