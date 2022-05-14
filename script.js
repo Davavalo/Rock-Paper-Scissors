@@ -1,78 +1,153 @@
-const rock = 0;
-const paper = 1;
-const scissors = 2;
-const rockPaperScissors = [rock, paper, scissors];
+
+//DOM Elements
+const choiceEl = document.getElementsByClassName("choice-el")
+const scoreEl = document.getElementsByClassName("score-el")
+const outcomeEl = document.getElementById("outcome-el")
+const rockEl = document.getElementById("rock-el")
+const paperEl = document.getElementById("paper-el")
+const scissorsEl = document.getElementById("scissor-el")
+const playerBox = document.querySelector(".playerchoice")
+const computerBox = document.querySelector(".computerchoice")
+const finalResults = document.getElementById("final-results")
+const gameOverScreen = document.querySelector(".gameover")
+const restartBtn = document.getElementById("restartbtn")
+
+//Click Event Listeners
+rockEl.addEventListener("click", () =>{
+    playRound("rock", computerPlay())
+    hasLostGame()
+})
+
+paperEl.addEventListener("click", () =>{
+    playRound("paper", computerPlay())
+    hasLostGame()
+})
+
+scissorsEl.addEventListener("click", () =>{
+    playRound("scissors", computerPlay())
+    hasLostGame()
+})
+
+restartBtn.addEventListener("click", () =>{
+    restartGame()
+})
+
+
+
 let playerScore = 0
 let computerScore = 0
+let winnerStatus = ""
 
 function computerPlay() {
-    let choice = Math.floor(Math.random() * 3);
-    return rockPaperScissors[choice];
+    let randomNum = Math.floor(Math.random() * 3);
+    switch (randomNum){
+        case 0: 
+            return "rock";
+            break;
+        case 1:
+            return "paper";
+            break;
+        case 2:
+            return "scissors";
+            break;
+    }
 };
 
-function playerOptions(selection){
-    if (typeof selection === 'string'){
-        selection = selection.toLowerCase();
-        if (selection === "rock"){
-            return 0;
-        } else if (selection === "paper"){
-            return 1;
-        } else if (selection === "scissors"){
-            return 2;
-        }
-    }
-}
-
 function playRound(playerSelection, computerSelection) {
-    if (playerSelection === computerSelection){
-        alert("It's a Tie");
-    } else if (
-        (playerSelection === 0 && computerSelection === 1) || 
-        (playerSelection === 1 && computerSelection === 2) ||
-        (playerSelection === 2 && computerSelection === 0)
-        ){ 
-            computerScore ++;
-            alert("You Lost");
-    } else if (
-        (playerSelection === 0 && computerSelection === 2) ||
-        (playerSelection === 1 && computerSelection === 0) ||
-        (playerSelection === 2 && computerSelection === 1)
-        ){
-            playerScore++;
-            alert("You Won");
-    }    
-  } 
-
-  function game(){
-    let enterChoice = prompt("Rock, Paper, or Scissors?")
-    enterChoice = enterChoice.toLowerCase()
-    if (
-        (enterChoice === "rock") ||
-        (enterChoice === "paper") ||
-        (enterChoice === "scissors")
+        if (playerSelection === computerSelection){
+            outcomeEl.innerText = "It's a Tie!"
+            winnerStatus = "tie"
+        } 
+        if (
+            (playerSelection === "rock" && computerSelection === "paper") || 
+            (playerSelection === "paper" && computerSelection === "scissors") ||
+            (playerSelection === "scissors" && computerSelection === "rock")
+            ){ 
+                computerScore ++;
+                outcomeEl.innerText = "You Lost!"
+                winnerStatus = "loser"
+        }
+        if (
+            (playerSelection === "rock" && computerSelection === "scissors") ||
+            (playerSelection === "paper" && computerSelection === "rock") ||
+            (playerSelection === "scissors" && computerSelection === "paper")
             ){
-                playRound(playerOptions(enterChoice), computerPlay())
-                checkScore()
-    } else {
-        alert("That's Not A Valid Choice")
-        game()
-    }
-  }
+                playerScore++;
+                outcomeEl.innerText = "You Won!"
+                winnerStatus = "winner"
+        } 
+            updateChoice(playerSelection, computerSelection)
+            updateScore()
+  } 
 
   function resetGame() {
       playerScore = 0
       computerScore = 0
   }
 
-  function checkScore(){
-    if (computerScore === 5){
-        alert(`You Lost, Final Score = Player ${playerScore}, Computer ${computerScore}`)
-        resetGame()
-    } else if (playerScore === 5) {
-        alert(`You Won, Final Score = Player ${playerScore}, Computer ${computerScore}`)
-        resetGame()
-    } else if (playerScore != 5 || computerScore !=5){
-        game()
+function hasLostGame(){
+    if (playerScore === 5 || computerScore === 5){
+        gameOver()
+        return true
+    } else {
+        return false
     }
-  }
-  
+}
+
+function gameOver(){
+    gameOverScreen.style.display = "block";
+    switch(true){
+        case (playerScore === 5):
+            finalResults.innerText = "You Won!";
+            break;
+        case (computerScore === 5):
+            finalResults.innerText = "You Lost!";
+            break;
+    }
+}
+
+function updateChoice(playerSelection, computerSelection) {
+    switch (playerSelection){
+        case "rock": 
+            choiceEl[0].innerText = "✊";
+            break;
+        case "paper":
+            choiceEl[0].innerText = "🖐";
+            break;
+        case "scissors":
+            choiceEl[0].innerText = "✌️";
+            break;
+    }
+    switch(computerSelection){
+        case "rock": 
+            choiceEl[1].innerText = "✊";
+            break;
+        case "paper":
+            choiceEl[1].innerText = "🖐";
+            break;
+        case "scissors":
+            choiceEl[1].innerText = "✌️";
+            break;
+    }
+}
+
+function updateScore(){
+    scoreEl[0].innerText = playerScore;
+    scoreEl[1].innerText = computerScore;
+    if (playerBox.hasAttribute("id", "winner") || computerBox.hasAttribute("id", "winner" || winnerStatus === "tie")){
+        playerBox.removeAttribute("id", "winner")
+        computerBox.removeAttribute("id", "winner")
+    }
+    switch (winnerStatus){
+        case "winner":
+            playerBox.setAttribute("id", "winner");
+            break;
+        case "loser":
+            computerBox.setAttribute("id", "winner");
+            break;
+    }
+}
+
+function restartGame(){
+    location.reload();
+}

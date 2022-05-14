@@ -1,0 +1,180 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+}
+
+.container > div:not(:last-child){
+    margin-bottom: 1rem;
+}
+
+header {
+    margin-top: auto;
+}
+
+header h1 {
+    font-size: 1.825em;
+    text-align: center;
+    margin-bottom: .5rem;
+}
+
+header p {
+    font-size: 1em;
+    text-align: center;
+}
+
+.selection-cont{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    padding: 0 2em;
+}
+
+.selection-cont > div {
+    display: grid;
+    grid-auto-rows: minmax(1rem, auto);
+    text-align: center;
+    place-items: center;
+    background-color: #f5f5f5;
+    border-radius: .25rem;
+    padding: 1rem;
+}
+
+.selection-cont > div p{
+    font-size: .875em;
+}
+
+.selection-cont > div h1{
+    font-size: 4em;
+}
+
+
+.score {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    grid-auto-rows: minmax(7rem, auto);
+    padding: 0 2em;
+}
+
+.score > div {
+    display: grid;
+    text-align: center;
+    place-items: center;
+    background-color: #f5f5f5;
+    border-radius: .25rem;
+    padding: 1rem;
+}
+
+.score > div h1 {
+    font-size: 4rem;
+}
+
+.section-text {
+    font-size: 1.5em;
+    font-weight: 500;
+    text-align: center;
+    margin: 1rem 0;
+}
+
+.selections {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-auto-rows: minmax(50px, auto);
+    gap: 1rem;
+    padding: 0 2em;
+}
+
+.selections p{
+    font-size: 3em;
+    display: grid;
+    text-align: center;
+    place-items: center;
+    background-color: #e9e7e7;
+    border-radius: .25rem;
+    padding: 1rem;
+}
+
+.selections p:hover{
+    transition: 200ms;
+    background-color: #c8c8c8;
+    cursor: pointer;
+}
+
+.gameover {
+    z-index: 1;
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    height: 100%;
+    width: 100%;
+    padding-top: 100px; 
+    left: 0;
+    top: 0;
+    overflow: hidden; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0, 0, 0, 0.8); 
+}
+
+.results {
+    position: fixed;
+    display: grid;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.results p{
+    color: #fff;
+}
+
+.results button {
+    font-size: 1em;
+    background-color: #259c57;
+    color: #fff;
+    border-radius: .25rem;
+    width: 200px;
+    height: 50px;
+    border: none;
+    cursor: pointer;
+}
+
+footer {
+    display: grid;
+    font-size: 0.875em;
+    place-items: center;
+    background-color: #2f3640;
+    color: #fff;
+    height: 5vh;
+    margin-top: auto;
+}
+
+#results{
+    display: grid;
+    text-align: center;
+    margin: 1rem 0;
+}
+
+#outcome-el{
+    display: grid;
+    text-align: center;
+    margin: 1rem 0;
+}
+
+#winner {
+    border: 2px solid #2ecc71;
+}
+
+#loser {
+    border: 2px solid #e74c3c;
+}

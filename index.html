@@ -8,7 +8,48 @@
     <title>Rock, Paper, Scissors</title>
 </head>
 <body>
-    <h1>Hello World</h1>
+    <div class="container">
+        <header>
+            <h1>Rock, Paper, Scissors</h1>
+            <p>The first to score 5 points wins the game</p>
+        </header>
+        <p id="outcome-el"></p>
+        <div class="selection-cont">
+            <div class="playerchoice">
+                <h1 class="choice-el">﹖</h1>
+                <p>Player Choice</p>
+            </div>
+            <div class="computerchoice">
+                <h1 class="choice-el">﹖</h1>
+                <p>Computer Choice</p>
+            </div>
+        </div>
+        <div class="score">
+            <div class="player-score">
+                <h1 class="score-el">0</h1>
+                <p>Player</p>
+            </div>
+            <div class="computer-score">
+                <h1 class="score-el">0</h1>
+                <p>Computer</p>
+            </div>
+        </div>
+        <p class="section-text">Make Your Selection</p>
+            <div class="selections">
+                <p id="rock-el">✊</p>
+                <p id="paper-el">🖐</p>
+                <p id="scissor-el">✌️</p>
+            </div>
+        <footer>
+            <p>Created by Davavalo</p>
+        </footer>
+    </div>
+    <div class="gameover">
+        <div class="results">
+            <p class="section-text" id="final-results">You Lost!</p>
+            <button id="restartbtn">Try Again?</button>
+        </div>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
